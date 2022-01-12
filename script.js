@@ -31,7 +31,7 @@ let tableListRowCounter = 1;
 
     dateCell.innerHTML = getDateString();
 
-    checkBoxCell.innerHTML = `<input type="checkbox" id="row${tableListRowCounter}" title="Added checkbox Title here">Added Checkbox Text</input>`;
+    checkBoxCell.innerHTML = `<input type="checkbox" id="row${tableListRowCounter}" title="Added checkbox Title here" value="Added checkbox value"></input>`;
 
     tableListRowCounter += 1;
 
@@ -41,46 +41,17 @@ let tableListRowCounter = 1;
 
   function deleteToDoItemToTable() {
 
-    let cb = document.querySelector('#row0');
-    console.log(" row0 checkBox.checked is " + cb.checked + ".");
-    if (document.querySelector('#row1')) {
-      console.log(" row1 is " + document.querySelector('#row1').checked);
-    }
-
     let inputs_in_table = document.getElementById("resumeToDoTable").getElementsByTagName("input");
-
-    inputs_in_table = document.getElementById("resumeToDoTable").getElementsByTagName("input");
-
-    console.log("   About to loop through table list : # of rows = " + inputs_in_table.length);
+    let checkBox2;
 
     for (var jLoop = 0; jLoop < inputs_in_table.length; jLoop++) {
-      let checkBox2 = inputs_in_table[jLoop];
+      checkBox2 = inputs_in_table[jLoop];
 
-      console.log(`\njLoop inputs_in_table[${jLoop}].type <` + inputs_in_table[jLoop].type + ">");
-
-      if (inputs_in_table[jLoop].type == "checkbox") { 
-          console.log(`    if jLoop ${jLoop} checkBox2.checked = <${checkBox2.checked}>`);
-          console.log(" and checkBox2.checked is " + checkBox2.checked);
-          console.log(" and checkBox2.innerHTML is '" + checkBox2.innerHTML + "' should be there");
-          console.log(" checkBox2.length       is " + checkBox2.length);
-          console.log(" and checkBox2.parentNode is " + checkBox2.parentNode);
-          console.log(" and checkBox2.parentNode.parentNode is " + checkBox2.parentNode.parentNode);
-          console.log(" and checkBox2.parentNode.parentNode.parentNode is " + checkBox2.parentNode.parentNode.parentNode);
-          console.log(" and checkBox2.parentNode.parentNode.parentNode.parentNode is " + checkBox2.parentNode.parentNode.parentNode.parentNode);
-          console.log(" and checkBox2.tagName  is " + checkBox2.tagName);
-          console.log(" and checkBox2.text     is '" + checkBox2.text + "' should be there");
-          console.log(" and checkBox2.textContent is '" + checkBox2.textContent + "' should be there");
-          console.log(" and checkBox2.title    is '" + checkBox2.title + "' should be there");
-          console.log(" and checkBox2.toString is " + checkBox2.toString());
-          console.log(" and checkBox2.type     is " + checkBox2.type);
-          console.log(" and checkBox2.value    is '" + checkBox2.value + "'");
-      }
+      if (inputs_in_table[jLoop].type == "checkbox") 
+        if (checkBox2.checked) {
+          document.getElementById("resumeToDoTable").deleteRow(jLoop);
+          tableListRowCounter--;
+        }
     }
 
-    console.log("\nend of Delete ");
-
   }
-
-//      consoleText += "<br>\n" + `rows[${i}].getElementsByTagName("row0") is ` + rows[i].getElementsByTagName("row0");
-//       consoleText += `document.getElementsByTagName("row0") = ` 
-//                    + document.getElementsByTagName("row0");
