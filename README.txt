@@ -1,5 +1,7 @@
 /*
 
+https://encompassingresidential.github.io/John-Resume-To-Do/
+
 1/08/2022 4:03 pm Pacific
 
 This is the Read Me file for my Software Development MasterMind (SDMM) project called "Resume To Do"
