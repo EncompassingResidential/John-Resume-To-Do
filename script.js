@@ -28,13 +28,13 @@ function createToDo() {
 
     addSingleToDo(task);
     document.getElementById('calculator-form').reset();
-  }
+   }
 }
 
 function addSingleToDo(todo) {
   console.log('addSingleToDo @ ' + getTimeString());
   todoItems.push(todo);
-  addToDoItemToTable(todo);
+  clearAndWriteOutItemTable(todo);
   writeToDoToLocalStorage(todoItems);
 }
 
@@ -89,7 +89,7 @@ function deleteAllCheckedTasks() {
   });
   clearLocalStorage();
   writeToDoToLocalStorage(todoItems);
-  addToDoItemToTable();
+  clearAndWriteOutItemTable();
 }
 
 function deleteSingleCheckedTask(element, id) {
@@ -103,7 +103,7 @@ function deleteSingleCheckedTask(element, id) {
   // Always write fresh Local Storage
   writeToDoToLocalStorage(todoItems);
   // ? why called here ?  
-  addToDoItemToTable();
+  clearAndWriteOutItemTable();
 }
 
 function getDateString() {
@@ -125,7 +125,7 @@ function getTimeString() {
   return today.getHours() + ":"  + (today.getMinutes() < 10 ? "0" : "") + today.getMinutes() + ":" + (today.getSeconds() < 10 ? "0" : "") + today.getSeconds();
 }
 
-function addToDoItemToTable() {
+function clearAndWriteOutItemTable() {
   clearToDoTable();
   for (let i = 0; i < todoItems.length; i++) {
     const row = createTableRow(todoItems[i].id);
