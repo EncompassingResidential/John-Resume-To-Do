@@ -3,7 +3,7 @@ let todoItems = JSON.parse(localStorage.getItem('todoItems')) || [];
 initalizeInputForm();
 
 function initalizeInputForm() {
-  console.log('initalizeInputForm @ ' + getTimeString());
+
   document.getElementById('submit-button').addEventListener('click', (e) => {
     e.preventDefault();
     createToDo();
@@ -16,7 +16,7 @@ function initalizeInputForm() {
 }
 
 function createToDo() {
-  // console.log('createToDo');
+
   const todoText = document.getElementById('toDoItemText').value;
   if (todoText.length > 0) {
     const task = {
@@ -32,7 +32,7 @@ function createToDo() {
 }
 
 function addSingleToDo(todo) {
-  console.log('addSingleToDo @ ' + getTimeString());
+
   todoItems.push(todo);
   clearAndWriteOutItemTable(todo);
   writeToDoToLocalStorage(todoItems);
@@ -47,7 +47,7 @@ function writeToDoToLocalStorage(array) {
 }
 
 function createTableRow(id) {
-  // console.log('createTableRow');
+
   const tableRow = document.createElement('tr');
   tableRow.setAttribute('class', 'row');
   tableRow.id = id;
@@ -62,19 +62,19 @@ function createDeleteButton() {
 }
 
 function clearToDoTable() {
-  console.log('clearToDoTable @ ' + getTimeString());
+
   const tableBody = document.getElementById('resumeToDoTable');
   removeAllChildNodes(tableBody);
 }
 
 function addRowToTable(row) {
-  // console.log('addRowToTable');
+
   const table = document.getElementById('resumeToDoTable');
   table.appendChild(row);
 }
 
 function toggleTask(id) {
-  console.log('toggleTask(id) @ ' + getTimeString());
+
   for (let i = 0; i < todoItems.length; i++) {
     if (todoItems[i].id === id) {
       todoItems[i].checked = !todoItems[i].checked;
@@ -93,7 +93,7 @@ function deleteAllCheckedTasks() {
 }
 
 function deleteSingleCheckedTask(element, id) {
-  console.log('deleteSingleCheckedTask(element, id) @ ' + getTimeString());
+
   element.parentElement.parentElement.remove();
   for (let i = 0; i < todoItems.length; i++) {
     if (todoItems[i].id === id && todoItems[i].checked === true) {
@@ -102,7 +102,8 @@ function deleteSingleCheckedTask(element, id) {
   }
   // Always write fresh Local Storage
   writeToDoToLocalStorage(todoItems);
-  // ? why called here ?  
+
+  // 4/09/2022 ? Need to check why called here ?
   clearAndWriteOutItemTable();
 }
 
@@ -112,7 +113,7 @@ function getDateString() {
   const today = new Date();
   const dayOfWeek = today.getDay();
 
-  let date = (today.getMonth().toString().padStart(1, '0') + 1) +
+  let date = ((today.getMonth() + 1).toString().padStart(1, '0')) +
             '-' + (today.getDate() < 10 ? "0" + today.getDate() : today.getDate()) +
             '-' + today.getFullYear();
   
@@ -147,7 +148,6 @@ function clearAndWriteOutItemTable() {
     row.appendChild(deleteButtonCell);
 
     checkBox.addEventListener('click', () => {
-      console.log(`checkBox EventListener for [${i}] @ ` + getTimeString());
       toggleTask(todoItems[i].id);
       if (todoItems[i].checked === true) {
         toDoText.style.textDecoration = 'line-through';
